@@ -39,6 +39,12 @@ def main():
     parser.add_argument('--face_enhance', action='store_true', help='Use GFPGAN to enhance face')
     parser.add_argument(
         '--fp32', action='store_true', help='Use fp32 precision during inference. Default: fp16 (half precision).')
+    args = parser.parse_args()
+
+    if args.fp32:
+        dtype = 'float32'
+    else:
+        dtype = 'float16'
     parser.add_argument(
         '--alpha_upsampler',
         type=str,
