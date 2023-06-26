@@ -39,12 +39,6 @@ def main():
     parser.add_argument('--face_enhance', action='store_true', help='Use GFPGAN to enhance face')
     parser.add_argument(
         '--fp32', action='store_true', help='Use fp32 precision during inference. Default: fp16 (half precision).')
-    args = parser.parse_args()
-
-    if args.fp32:
-        dtype = 'float32'
-    else:
-        dtype = 'float16'
     parser.add_argument(
         '--alpha_upsampler',
         type=str,
@@ -59,6 +53,10 @@ def main():
         '-g', '--gpu-id', type=int, default=None, help='gpu device to use (default=None) can be 0,1,2 for multi-gpu')
 
     args = parser.parse_args()
+    if args.fp32:
+        dtype = 'float32'
+    else:
+        dtype = 'float16'
 
     # determine models according to model names
     args.model_name = args.model_name.split('.')[0]
